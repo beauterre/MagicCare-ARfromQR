@@ -1,2 +1,5 @@
 # MagicCare-ARfromQR
-Demo of different techniques and description of workflow from unity
+Demoes of different techniques and description of workflow from unity
+
+
+https://beauterre.github.io/MagicCare-ARfromQR/
