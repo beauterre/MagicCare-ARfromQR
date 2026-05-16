@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Care AR Reveal</title>
+    <!-- We use A-Frame for the 3D rendering and MindAR for the tracking -->
+    <script src="https://aframe.io/releases/10.1.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+      body { margin: 0; overflow: hidden; }
+      #overlay { 
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.5); color: white; 
+        display: flex; justify-content: center; align-items: center; 
+        z-index: 10; font-family: sans-serif; text-align: center;
+      }
+      .hidden { display: none !important; }
+    </style>
+  </head>
+  <body>
+
+    <!-- Instructions Overlay: Disappears once the user allows camera -->
+    <div id="overlay">
+      <div>
+        <h1>✨ Magic Care ✨</h1>
+        <p>Point your camera at the picture in your book!</p>
+      </div>
+    </div>
+
+    <!-- 
+      mindar-image: This is the AR engine. 
+      imageTargetSrc: This points to the compiled .mind file 
+    -->
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
+              color-space="SRGB" 
+              renderer="colorManagement: true, physicallyCorrectLights: true" 
+              vr-mode-ui="enabled: false" 
+              device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <!-- Replace 'magic-character.glb' with your actual model path -->
+        <a-asset-item id="magicModel" src="./magic-character.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- 
+        targetIndex: 0 means it looks for the first image in the .mind file.
+        The model is placed inside the 'target' entity so it moves with the book.
+      -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model 
+            src="#magicModel" 
+            position="0 0 0" 
+            scale="0.5 0.5 0.5" 
+            rotation="0 0 0"
+            animation="property: position; from: 0 -0.5 0; to: 0 0 0; dur: 1000; easing: easeOutExpo">
+        </a-gltf-model>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      // This script hides the overlay once the AR engine starts
+      document.addEventListener('DOMContentLoaded', () => {
+        const sceneEl = document.querySelector('a-scene');
+        sceneEl.addEventListener('arReady', () => {
+          document.getElementById('overlay').classList.add('hidden');
+        });
+      });
+    </script>
+  </body>
+</html>
