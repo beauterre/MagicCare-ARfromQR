@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Care Demo - Simple Cube</title>
+    <!-- 1. Load A-Frame (The 3D Engine) -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- 2. Load AR.js (The Tracking Engine) -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <style>
+      body { margin: 0; overflow: hidden; font-family: sans-serif; }
+      #ui {
+        position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.8); padding: 15px; border-radius: 15px;
+        text-align: center; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0px; overflow: hidden;">
+    <!-- UI Overlay -->
+    <div id="ui">
+      <strong>✨ Magic Care Demo ✨</strong><br>
+      Point your camera at the <b>Hiro Marker</b>!
+    </div>
+
+    <!-- AR Scene -->
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+      
+      <!-- The Marker: When this is seen, the "contents" inside are shown -->
+      <a-marker preset="hiro">
+        
+        <!-- A Simple Magic Cube -->
+        <!-- We add a basic animation to make it rotate -->
+        <a-box 
+            position="0 0.5 0" 
+            material="color: #FF4081; opacity: 0.9;" 
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear"
+            shadow="true">
+        </a-box>
+
+        <!-- A little "floating" text above the cube -->
+        <a-text 
+            value="MAGIC!" 
+            position="-0.5 1.2 0" 
+            color="#000" 
+            width="3" 
+            align="center">
+        </a-text>
+
+      </a-marker>
+
+      <!-- The Camera -->
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
