@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Care AR</title>
+    <!-- This imports the Model Viewer library from Google -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/33.0.0/model-viewer.min.js"></script>
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        model-viewer {
+            width: 100vw;
+            height: 100vh;
+            background-color: #f0f8ff; /* Light blue background */
+        }
+        .ar-button {
+            background-color: #ff4081; /* Magic Pink/Red */
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 24px;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The AR Viewer -->
+    <!-- Replace "magic-character.glb" with the actual filename -->
+    <model-viewer 
+        src="magic-character.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        poster="poster.webp" 
+        shadow-intensity="1" 
+        auto-rotate 
+        autoplay>
+        
+        <button slot="ar-button" class="ar-button">
+            ✨ MAGIC: SEE IN ROOM ✨
+        </button>
+        
+    </model-viewer>
+
+</body>
+</html>
